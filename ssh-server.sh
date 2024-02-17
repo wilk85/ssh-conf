@@ -34,12 +34,12 @@ function start_ssh_svc {
 }
 
 
-# install_ssh
-# sshd_backup
-# setup_remote_user
-# copy_sshd_config
+install_ssh
+sshd_backup
+setup_remote_user
+copy_sshd_config
 firewall
-# start_ssh_svc
+start_ssh_svc
 
 
 # https://ubuntu.com/server/docs/service-openssh
