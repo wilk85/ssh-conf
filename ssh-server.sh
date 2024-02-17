@@ -24,7 +24,7 @@ function copy_sshd_config {
     sudo cp sshd_config.new /etc/ssh/sshd_config
 }
 
-function start_reload_sshd {
+function start_ssh_svc {
     sudo systemctl enable --now ssh
 }
 
