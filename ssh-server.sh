@@ -17,8 +17,8 @@ function setup_remote_user {
 }
 
 function firewall {
-    ufwStatus=$(sudo ufw status | head -n 1 | grep -wo aktywny)
-    [[ if "$ufwStatus" == "nieaktywny" ]] || [[ if "$ufwStatus" == "notactive" ]]; then
+    ufwStatus=$(sudo ufw status | head -n 1 | cut -d ':' -f2 | tr -d " ")
+    if [[ "$ufwStatus" == "nieaktywny" || "$ufwStatus" == "notactive" ]]; then
         sudo ufw enable
     fi
 
@@ -33,12 +33,13 @@ function start_ssh_svc {
     sudo systemctl enable --now ssh
 }
 
-install_ssh
-sshd_backup
-setup_remote_user
-copy_sshd_config
+
+# install_ssh
+# sshd_backup
+# setup_remote_user
+# copy_sshd_config
 firewall
-start_ssh_svc
+# start_ssh_svc
 
 
 # https://ubuntu.com/server/docs/service-openssh
