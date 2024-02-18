@@ -1,6 +1,15 @@
 #!/bin/bash
 # start script on system to setup ssh server
 
+function get_info {
+    local desktopEnvecho=$("$XDG_CURRENT_DESKTOP")
+    local displayManager=$(sudo cat /etc/X11/default-display-manager)
+    if [[ "$desktopEnvecho" != "XFCE" || "$displayManager" != "lightdm" ]]; then
+        echo "Desktop env is not XFCE, or display manager is not lightdm, exit"
+        exit
+    fi
+}
+
 function install_ssh {
     echo " + Install openssh packages"
     sudo apt install openssh-client openssh-server -y
@@ -14,7 +23,7 @@ function sshd_config {
 }
 
 function setup_remote_user {
-    echo " + Setup remote user, disable showing in lightdm"
+    echo " + Setup remote user, disable showing remote use in lightdm"
     local remoteUser='remote'
     sudo useradd -m -s /bin/bash "$remoteUser"
     sudo usermod -aG sudo "$remoteUser"
@@ -36,7 +45,7 @@ function start_ssh_svc {
     sudo systemctl enable --now ssh
 }
 
-
+get_info
 install_ssh
 sshd_config
 setup_remote_user
