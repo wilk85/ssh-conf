@@ -14,7 +14,7 @@ function sshd_config {
 }
 
 function setup_remote_user {
-    echo " + Setup remote user"
+    echo " + Setup remote user, disable showing in lightdm"
     local remoteUser='remote'
     sudo useradd -m -s /bin/bash "$remoteUser"
     sudo usermod -aG sudo "$remoteUser"
