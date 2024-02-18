@@ -18,6 +18,7 @@ function setup_remote_user {
     local remoteUser='remote'
     sudo useradd -m -s /bin/bash "$remoteUser"
     sudo usermod -aG sudo "$remoteUser"
+    sudo cp ${PWD}/remote "/var/lib/AccountsService/users/$remoteUser"
 }
 
 function firewall_config {
